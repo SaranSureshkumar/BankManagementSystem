@@ -14,4 +14,8 @@ public class JwtMiddleWare {
     public ResponseModel generateJwt(JwtModel jwtModel){
         return jwtService.generateJwt(jwtModel);
     }
+
+    public ResponseModel verifyJwt(String jwtToken) {
+        return jwtService.verifyJwt(jwtToken);
+    }
 }

@@ -1,11 +1,15 @@
 package com.bms.bankmanagementsystem.service.impl;
 
+import ch.qos.logback.core.net.SyslogOutputStream;
 import com.bms.bankmanagementsystem.model.entity.Customer;
 import com.bms.bankmanagementsystem.model.request.JwtModel;
 import com.bms.bankmanagementsystem.model.response.ResponseModel;
 import com.bms.bankmanagementsystem.repository.CustomerRepository;
 import com.bms.bankmanagementsystem.service.JwtService;
 import com.bms.bankmanagementsystem.utility.helper.ResponseStatusEnum;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import lombok.extern.slf4j.Slf4j;
@@ -31,6 +35,9 @@ public class JwtServiceImpl implements JwtService {
 
     @Autowired
     private CustomerRepository customerRepository;
+
+    @Autowired
+    private ObjectMapper objectMapper;
 
     @Override
     public ResponseModel generateJwt(JwtModel jwtModel) {
@@ -127,8 +134,38 @@ public class JwtServiceImpl implements JwtService {
                 responseModel.setStatusCode(HttpStatus.NOT_FOUND.value());
             }
         }catch (Exception exception){
-            log.error("EXCEPTION OCCURED IN GENERATE JWT - "+ exception);
+            log.error("EXCEPTION OCCURRED IN GENERATE JWT - "+ exception);
         }
         return responseModel;
     }
+
+    @Override
+    public ResponseModel verifyJwt(String jwtToken) {
+        log.info("JWT SERVICE - VERIFY JWT");
+
+        ResponseModel responseModel = new ResponseModel<>();
+
+        try {
+            Claims  claims = Jwts.parserBuilder().setSigningKey(secretToken).build().parseClaimsJws(jwtToken).getBody();
+
+            responseModel.setData("VERIFIED");
+            responseModel.setMessage(ResponseStatusEnum.Success);
+            responseModel.setStatusCode(HttpStatus.OK.value());
+
+        }catch(ExpiredJwtException jwtExpiration){
+            responseModel.setData("JWT Expired");
+            responseModel.setMessage(ResponseStatusEnum.Failure);
+            responseModel.setStatusCode(HttpStatus.UNAUTHORIZED.value());
+        }
+        catch (Exception e){
+            log.error("ERROR OCCURRED - JWT SERVICE - VERIFY JWT : ", e);
+
+            responseModel.setData("Contact tech support");
+            responseModel.setMessage(ResponseStatusEnum.Failure);
+            responseModel.setStatusCode(HttpStatus.UNAUTHORIZED.value());
+        }
+        return responseModel;
+    }
+
+
 }

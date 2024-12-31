@@ -6,5 +6,7 @@ import org.springframework.stereotype.Component;
 
 @Component
 public interface JwtService {
-    public ResponseModel generateJwt(JwtModel jwtModel);
+    ResponseModel generateJwt(JwtModel jwtModel);
+
+    ResponseModel verifyJwt(String jwtToken);
 }
