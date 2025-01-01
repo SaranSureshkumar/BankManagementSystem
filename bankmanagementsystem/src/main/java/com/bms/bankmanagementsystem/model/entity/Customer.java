@@ -3,7 +3,8 @@ package com.bms.bankmanagementsystem.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Entity(name = "Customer")
+@Entity
+@Table(name = "Customer")
 @Getter
 @Setter
 @ToString
@@ -13,19 +14,19 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "CustomerID")
+    @Column(name = "Customer_ID")
     int customerId;
 
-    @Column(name = "FirstName")
+    @Column(name = "First_Name")
     String firstName;
 
-    @Column(name = "LastName")
+    @Column(name = "Last_Name")
     String lastName;
 
     @Column(name = "Email")
     String email;
 
-    @Column(name = "PhoneNumber")
+    @Column(name = "Phone_Number")
     String phoneNumber;
 
     @Column(name = "Password")
@@ -40,15 +41,18 @@ public class Customer {
     @Column(name = "State")
     String state;
 
-    @Column(name = "PostalCode")
+    @Column(name = "Postal_Code")
     String postalCode;
 
     @Column(name = "Country")
     String country;
 
-    @Column(name = "CreateAt")
+    @Column(name = "Created_At")
     String createdAt;
 
-    @Column(name = "UpdatedAt")
+    @Column(name = "Updated_At")
     String updatedAt;
+
+    @Column(name = "Customer_Key")
+    String customerKey;
 }

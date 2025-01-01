@@ -7,5 +7,7 @@ import org.springframework.stereotype.Component;
 @Component
 public interface CustomerService {
 
-    public ResponseModel createCustomer(Customer customer);
+    ResponseModel createCustomer(Customer customer);
+
+    ResponseModel getCustomerDetails(String customerKey);
 }
