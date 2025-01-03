@@ -3,6 +3,8 @@ package com.bms.bankmanagementsystem.model.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Table(name = "Customer")
 @Getter
@@ -14,45 +16,40 @@ public class Customer {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Customer_ID")
-    int customerId;
+    private Integer customerId;
 
-    @Column(name = "First_Name")
-    String firstName;
+    private String firstName;
 
-    @Column(name = "Last_Name")
-    String lastName;
+    private String lastName;
 
-    @Column(name = "Email")
-    String email;
+    @Column(unique = true)
+    private String email;
 
-    @Column(name = "Phone_Number")
-    String phoneNumber;
+    @Column(unique = true)
+    private String phoneNumber;
 
-    @Column(name = "Password")
-    String password;
+    private String password;
 
-    @Column(name = "Address")
-    String address;
+    private String address;
 
-    @Column(name = "City")
-    String city;
+    private String city;
 
-    @Column(name = "State")
-    String state;
+    private String state;
 
-    @Column(name = "Postal_Code")
-    String postalCode;
+    private String postalCode;
 
-    @Column(name = "Country")
-    String country;
+    private String country;
 
-    @Column(name = "Created_At")
-    String createdAt;
+    private LocalDateTime createdAt = LocalDateTime.now();
 
-    @Column(name = "Updated_At")
-    String updatedAt;
+    private LocalDateTime updatedAt = LocalDateTime.now();
 
-    @Column(name = "Customer_Key")
-    String customerKey;
+    @Column(unique = true)
+    private String customerKey;
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private AccountDetails accountDetails;
+
+    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
+    private SavingsAccount savingsAccount;
 }

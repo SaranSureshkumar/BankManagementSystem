@@ -2,6 +2,7 @@ package com.bms.bankmanagementsystem.controller;
 
 import com.bms.bankmanagementsystem.middleware.CustomerMiddleWare;
 import com.bms.bankmanagementsystem.model.entity.Customer;
+import com.bms.bankmanagementsystem.model.request.UpdateCustomer;
 import com.bms.bankmanagementsystem.model.response.ResponseModel;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,15 +16,21 @@ public class CustomerController {
     @Autowired
     private CustomerMiddleWare customerMiddleWare;
 
-    @PostMapping(value = "/registerCustomer", name = "Register User")
+    @PostMapping(value = "/registerCustomer", name = "Register/Create customer")
     public ResponseModel createUser(@RequestBody Customer customer){
-        log.info("CUSTOMER CONTROLLER - Create User");
+        log.info("CUSTOMER CONTROLLER - CREATE CUSTOMER");
         return customerMiddleWare.createCustomer(customer);
     }
 
-    @GetMapping(value = "/getCustomerDetail/{customerKey}", name = "Get Customer Details")
+    @GetMapping(value = "/getCustomerDetail/{customerKey}", name = "Get customer details")
     public ResponseModel getCustomerDetail(@PathVariable String customerKey, @RequestHeader("Authorization") String jwtToken){
-        log.info("CUSTOMER CONTROLLER - Get customer detail");
+        log.info("CUSTOMER CONTROLLER - GET CUSTOMER DETAIL");
         return customerMiddleWare.getCustomerDetail(customerKey, jwtToken);
+    }
+
+    @PostMapping(value = "/updateCustomer", name = "Update customer details")
+    public ResponseModel updateDetail(@RequestBody UpdateCustomer customer, @RequestHeader("Authorization") String jwtToken){
+        log.info("CUSTOMER CONTROLLER - UPDATE CUSTOMER DETAIL");
+        return customerMiddleWare.updateCustomerDetail(customer, jwtToken);
     }
 }
