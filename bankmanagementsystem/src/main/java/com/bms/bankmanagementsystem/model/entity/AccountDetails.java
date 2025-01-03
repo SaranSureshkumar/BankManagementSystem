@@ -17,13 +17,18 @@ public class AccountDetails {
 
     private Boolean savingsAccount = false;
 
+    private int savingsAccountCounts = 0;
+
     private Boolean loanAccount = false;
+
+    private int loanAccountsCount = 0;
 
     private Boolean dematAccount = false;
 
+    private int dematAccountCount = 0;
+
     @OneToOne
-    @MapsId
-    @JoinColumn(name = "customer_id")
+    @JoinColumn(name = "customer_id", referencedColumnName = "customerId", nullable = false)
     private Customer customer;
 
 }

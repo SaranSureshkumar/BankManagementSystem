@@ -18,6 +18,9 @@ public class Customer {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer customerId;
 
+    @Column(unique = true)
+    private String customerKey;
+
     private String firstName;
 
     private String lastName;
@@ -43,13 +46,4 @@ public class Customer {
     private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updatedAt = LocalDateTime.now();
-
-    @Column(unique = true)
-    private String customerKey;
-
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
-    private AccountDetails accountDetails;
-
-    @OneToOne(mappedBy = "customer", cascade = CascadeType.ALL)
-    private SavingsAccount savingsAccount;
 }

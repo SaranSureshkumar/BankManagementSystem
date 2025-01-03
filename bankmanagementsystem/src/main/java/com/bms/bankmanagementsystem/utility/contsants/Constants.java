@@ -5,5 +5,7 @@ import org.springframework.stereotype.Component;
 @Component
 public class Constants {
 
-    public final int customerKeyLength = 8;
+    public static final int customerKeyLength = 8;
+
+    public static double savingsAccountMinimumBalance = 5000;
 }

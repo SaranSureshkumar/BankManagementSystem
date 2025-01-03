@@ -19,7 +19,7 @@ public class SavingsAccount {
     private Integer savingAccountId;
 
     @OneToOne
-    @JoinColumn(name = "customer_id", unique = true, nullable = false)
+    @JoinColumn(name = "customer_id", referencedColumnName = "customerId", unique = true, nullable = false)
     private Customer customer;
 
     @Column(unique = true)
@@ -29,10 +29,9 @@ public class SavingsAccount {
 
     private Double minimumBalance;
 
+    @Column(nullable = false, updatable = false)
     private LocalDateTime createdAt = LocalDateTime.now();
 
     private LocalDateTime updatedAt = LocalDateTime.now();
 
-    @OneToMany(mappedBy = "savingsAccount", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<Transaction> transactions;
 }
