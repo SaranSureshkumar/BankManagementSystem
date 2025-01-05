@@ -16,7 +16,7 @@ import java.util.List;
 public class SavingsAccount {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer savingAccountId;
+    private Integer savingsAccountId;
 
     @OneToOne
     @JoinColumn(name = "customer_id", referencedColumnName = "customerId", unique = true, nullable = false)
@@ -25,7 +25,7 @@ public class SavingsAccount {
     @Column(unique = true)
     private String accountNumber;
 
-    private Double accountBalance;
+    private Double accountBalance = (double) 0;
 
     private Double minimumBalance;
 

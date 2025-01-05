@@ -1,6 +1,6 @@
 package com.bms.bankmanagementsystem.controller;
 
-import com.bms.bankmanagementsystem.middleware.CustomerMiddleWare;
+import com.bms.bankmanagementsystem.middleware.CustomerMiddleware;
 import com.bms.bankmanagementsystem.model.entity.Customer;
 import com.bms.bankmanagementsystem.model.request.UpdateCustomer;
 import com.bms.bankmanagementsystem.model.response.ResponseModel;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 public class CustomerController {
 
     @Autowired
-    private CustomerMiddleWare customerMiddleWare;
+    private CustomerMiddleware customerMiddleWare;
 
     @PostMapping(value = "/registerCustomer", name = "Register/Create customer")
     public ResponseModel createUser(@RequestBody Customer customer){

@@ -1,6 +1,6 @@
 package com.bms.bankmanagementsystem.controller;
 
-import com.bms.bankmanagementsystem.middleware.JwtMiddleWare;
+import com.bms.bankmanagementsystem.middleware.JwtMiddleware;
 import com.bms.bankmanagementsystem.model.request.JwtModel;
 import com.bms.bankmanagementsystem.model.response.ResponseModel;
 import lombok.extern.slf4j.Slf4j;
@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 public class JwtController {
 
     @Autowired
-    private JwtMiddleWare jwtMiddleWare;
+    private JwtMiddleware jwtMiddleWare;
 
     @PostMapping(value = "/generateJwt", name = "Generate JWT")
     public ResponseModel generateJwt(@RequestBody JwtModel jwtModel){
